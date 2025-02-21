@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\Evento;
+use App\Http\Controllers\EventosController;
 
 
 Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
@@ -10,9 +11,9 @@ Route::middleware(['auth:sanctum'])->get('/user', function (Request $request) {
 });
 
 Route::middleware(['auth:sanctum'])->group(function () {
-    Route::get('/events', function () {
-        return Evento::all();
-    });
+
+    Route::get('/events', [EventosController::class, 'getEvents']);
+
 
     Route::get('/events/{id}', function ($id) {
         return Evento::findOrFail($id);
